@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduStream - Online Learning Platform</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    .animate__animated {
+            animation-duration: 1s;
+            animation-fill-mode: both;
+        }
+        .animate__fadeIn {
+            animation-name: fadeIn;
+        }
+        .animate__pulse {
+            animation-name: pulse;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">EduStream</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="courses-link">Courses</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="progress-link">Progress</a>
+            </li>
+            <li class="nav-item" id="signin-nav">
+                <a class="nav-link" href="#" data-toggle="modal" data-target="#signInModal">Sign In</a>
+            </li>
+            <li class="nav-item" id="signup-nav">
+                <a class="nav-link" href="#" data-toggle="modal" data-target="#signUpModal">Sign Up</a>
+            </li>
+            <li class="nav-item" id="signout-nav" style="display:none; transition: all 0.3s ease;">
+                <a class="nav-link" href="#" id="signout-link">Sign Out</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Sign In Modal -->
+<div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="signInForm">
+                    <div class="form-group">
+                        <label for="signInEmail">Email address</label>
+                        <input type="email" class="form-control" id="signInEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signInPassword">Password</label>
+                        <input type="password" class="form-control" id="signInPassword" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign In</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sign Up Modal -->
+<div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="signUpModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signUpModalLabel">Sign Up</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="signUpForm">
+                    <div class="form-group">
+                        <label for="signUpEmail">Email address</label>
+                        <input type="email" class="form-control" id="signUpEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signUpPassword">Password</label>
+                        <input type="password" class="form-control" id="signUpPassword" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<main class="container mt-5">
+    <div id="homepage-section" class="mt-4 animate__animated animate__fadeIn">
+        <h1 class="text-center mb-5">Welcome to EduStream</h1>
+        <div class="text-center mb-5">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/26993481-453a-41ab-a409-17caf7054abf.png" class="img-fluid rounded shadow animate__animated animate__pulse animate__infinite" alt="Interactive online learning platform with course categories">
+        </div>
+    </div>
+    
+    <div id="courses-section" class="mt-4" style="display:none;">
+        <h2 class="text-center mb-4">Available Courses</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/69662d8c-d7b1-4299-ba52-e6a95cc1f526.png" class="card-img-top" alt="Web development course cover">
+                    <div class="card-body">
+                        <h5 class="card-title">Introduction to Web Development</h5>
+                        <button class="btn btn-primary btn-sm view-course" data-course="web-dev">View Course</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c25b413c-7092-4713-9095-48d33d1dada8.png" class="card-img-top" alt="Data science course cover">
+                    <div class="card-body">
+                        <h5 class="card-title">Data Science Fundamentals</h5>
+                        <button class="btn btn-primary btn-sm view-course" data-course="data-science">View Course</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c8efb85e-31e5-46bb-9c73-1070e16bf8fc.png" class="card-img-top" alt="Mobile development course cover">
+                    <div class="card-body">
+                        <h5 class="card-title">Mobile App Development</h5>
+                        <button class="btn btn-primary btn-sm view-course" data-course="mobile-dev">View Course</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="course-detail-section" class="mt-4" style="display:none;">
+        <button class="btn btn-secondary mb-3" id="back-to-courses">Back to Courses</button>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="video-container">
+                    <iframe id="course-video" src="" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <h3 id="course-title" class="mt-3"></h3>
+            </div>
+            <div class="col-md-4">
+                <h4>Course Modules</h4>
+                <ul id="course-modules" class="list-group"></ul>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    // User Authentication
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+
+    document.getElementById('signUpForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const email = document.getElementById('signUpEmail').value;
+        const password = document.getElementById('signUpPassword').value;
+        
+        // Check if user already exists
+        const userExists = users.some(user => user.email === email);
+        if (userExists) {
+            alert('This email is already registered. Please sign in instead.');
+            $('#signUpModal').modal('hide');
+            $('#signInModal').modal('show');
+            return;
+        }
+        
+        users.push({ email, password });
+        localStorage.setItem('users', JSON.stringify(users));
+        alert('Sign Up Successful!');
+        $('#signUpModal').modal('hide');
+        document.getElementById('signup-nav').style.display = 'none';
+    });
+
+    document.getElementById('signInForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const email = document.getElementById('signInEmail').value;
+        const password = document.getElementById('signInPassword').value;
+        
+        const userExists = users.some(user => user.email === email);
+        if (!userExists) {
+            alert('Account not found. Please sign up first.');
+            $('#signUpModal').modal('show');
+            return;
+        }
+
+        const user = users.find(user => user.email === email && user.password === password);
+        if (user) {
+            alert('Sign In Successful!');
+            $('#signInModal').modal('hide');
+            // Set login state
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            // Show signout, hide signin/signup
+            document.getElementById('signin-nav').style.display = 'none';
+            document.getElementById('signup-nav').style.display = 'none';
+            document.getElementById('signout-nav').style.display = 'block';
+            // Show courses, hide homepage
+            document.getElementById('homepage-section').style.display = 'none';
+            document.getElementById('courses-section').style.display = 'block';
+        } else {
+            alert('Invalid password');
+        }
+    });
+
+    // Progress Tracking
+    document.getElementById('progress-link').addEventListener('click', function(e) {
+        e.preventDefault();
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        if (!user) {
+            $('#signInModal').modal('show');
+            return;
+        }
+
+        let userProgress = JSON.parse(localStorage.getItem('userProgress')) || {};
+        userProgress[user.email] = userProgress[user.email] || {};
+        
+        if (Object.keys(userProgress[user.email]).length === 0) {
+            document.getElementById('progress-link').textContent = 'No Progress Yet';
+        } else {
+            let completedCourses = Object.values(userProgress[user.email]).reduce((a, b) => a + b, 0);
+            document.getElementById('progress-link').textContent = `Progress: ${completedCourses}%`;
+        }
+    });
+
+    // Course selection functionality
+    document.querySelectorAll('.view-course').forEach(button => {
+        button.addEventListener('click', function() {
+            const courseId = this.dataset.course;
+            showCourseDetails(courseId);
+        });
+    });
+
+    document.getElementById('back-to-courses').addEventListener('click', function() {
+        document.getElementById('courses-section').style.display = 'block';
+        document.getElementById('course-detail-section').style.display = 'none';
+        document.getElementById('homepage-section').style.display = 'none';
+    });
+
+    // Update nav based on login state
+    function updateNavState() {
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        if (user) {
+            document.getElementById('signin-nav').style.display = 'none';
+            document.getElementById('signup-nav').style.display = 'none';
+            document.getElementById('signout-nav').style.display = 'block';
+        } else {
+            document.getElementById('signin-nav').style.display = 'block';
+            document.getElementById('signup-nav').style.display = 'block';
+            document.getElementById('signout-nav').style.display = 'none';
+        }
+    }
+
+    // Sign out functionality
+    document.getElementById('signout-link').addEventListener('click', function(e) {
+        e.preventDefault();
+        localStorage.removeItem('currentUser');
+        alert('Signed out successfully');
+        // Show signin, hide signout
+        document.getElementById('signin-nav').style.display = 'block';
+        document.getElementById('signup-nav').style.display = 'block';
+        document.getElementById('signout-nav').style.display = 'none';
+    });
+
+    // Hide signup after successful registration
+    document.getElementById('signUpForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const email = document.getElementById('signUpEmail').value;
+        const password = document.getElementById('signUpPassword').value;
+        users.push({ email, password });
+        localStorage.setItem('users', JSON.stringify(users));
+        alert('Sign Up Successful!');
+        $('#signUpModal').modal('hide');
+        document.getElementById('signup-nav').style.display = 'none';
+    });
+
+    function showCourseDetails(courseId) {
+        document.getElementById('courses-section').style.display = 'none';
+        document.getElementById('course-detail-section').style.display = 'block';
+
+        // Simulate course content loading
+        const courses = {
+            'web-dev': {
+                title: 'Web Development Fundamentals',
+                video: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+                modules: ['HTML Basics', 'CSS Fundamentals', 'JavaScript Essentials']
+            },
+            'data-science': {
+                title: 'Data Science Introduction',
+                video: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+                modules: ['Python Basics', 'Pandas', 'Data Visualization']
+            },
+            'mobile-dev': {
+                title: 'Mobile App Development',
+                video: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+                modules: ['React Native', 'UI Design', 'API Integration']
+            }
+        };
+
+        const course = courses[courseId];
+        document.getElementById('course-title').textContent = course.title;
+        document.getElementById('course-video').src = course.video;
+        
+        const modulesList = document.getElementById('course-modules');
+        modulesList.innerHTML = '';
+        course.modules.forEach(module => {
+            const li = document.createElement('li');
+            li.className = 'list-group-item';
+            li.textContent = module;
+            modulesList.appendChild(li);
+        });
+
+        // Track progress when video is watched
+        const videoFrame = document.getElementById('course-video');
+        videoFrame.onload = function() {
+            const user = JSON.parse(localStorage.getItem('currentUser'));
+            if (user) {
+                let userProgress = JSON.parse(localStorage.getItem('userProgress')) || {};
+                userProgress[user.email] = userProgress[user.email] || {};
+                userProgress[user.email][course.title] = userProgress[user.email][course.title] || 0;
+                localStorage.setItem('userProgress', JSON.stringify(userProgress));
+            }
+        };
+    }
+
+    // Courses link handler
+    document.getElementById('courses-link').addEventListener('click', function(e) {
+        e.preventDefault();
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        if (!user) {
+            $('#signInModal').modal('show');
+            return;
+        }
+        document.getElementById('homepage-section').style.display = 'none';
+        document.getElementById('course-detail-section').style.display = 'none';
+        document.getElementById('courses-section').style.display = 'block';
+    });
+
+    // Initialize page - hide/show based on login state
+    document.addEventListener('DOMContentLoaded', function() {
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        const signoutNav = document.getElementById('signout-nav');
+        const signinNav = document.getElementById('signin-nav');
+        const signupNav = document.getElementById('signup-nav');
+        
+        if (user) {
+            signoutNav.style.display = 'block';
+            signinNav.style.display = 'none';
+            signupNav.style.display = 'none';
+            document.getElementById('homepage-section').style.display = 'none';
+            document.getElementById('courses-section').style.display = 'block';
+        } else {
+            const email = user ? user.email : '';
+            const userExists = users.some(u => u.email === email);
+            signoutNav.style.display = 'none';
+            signinNav.style.display = 'block';
+            signupNav.style.display = userExists ? 'none' : 'block';
+            document.getElementById('homepage-section').style.display = 'block';
+            document.getElementById('courses-section').style.display = 'none';
+        }
+    });
+</script>
+</body>
+</html>
