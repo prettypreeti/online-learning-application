@@ -1,6 +1,6 @@
 # online-learning-application
 
-# PWA
+
 company- codtech IT Solutions
 NAME- Preeti Mewada
 Intern ID:CT04DH1730
@@ -43,3 +43,9 @@ Styling & Animation:
 
 -Uses Bootstrap 4 for layout and responsive design.
 -Custom animations via Animate.css and additional CSS keyframes (fadeIn, pulse).
+
+
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/9c4e1e30-8f77-41fc-b66c-e2850f066331" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/d2a85ffb-a8d0-4bef-beba-16126669b870" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/84671137-958e-4aa0-95ee-ca3ac8017a2d" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/f37dae37-3390-49f2-a944-6ac12a917a00" />
